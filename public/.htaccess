@@ -1,0 +1,25 @@
+# Enable mod_rewrite
+RewriteEngine On
+
+# Set the base directory for relative URLs
+RewriteBase /
+
+# Redirect everything except existing files and directories to index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [QSA,L]
+
+# Optional: Add caching headers for better performance
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|css|js|jpg|jpeg|png|gif|ico|svg|woff|woff2|ttf|eot|otf|ttc)$">
+    Header set Cache-Control "max-age=31536000, public"
+  </FilesMatch>
+</IfModule>
+
+# Optional: Prevent directory listing
+Options -Indexes
+
+# Optional: Handle trailing slashes consistently
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [L,R=301]

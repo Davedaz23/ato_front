@@ -1,0 +1,9 @@
+
+
+ol {
+  list-style-type: decimal; /* Default numbered list */
+}
+
+li {
+  margin-left: 40px; /* Indentation */
+}
